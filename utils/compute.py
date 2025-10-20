@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from collections import Counter
 import hashlib
 from typing import Dict, Any
@@ -12,7 +12,7 @@ def compute_properties(value: str) -> Dict[str, Any]:
     word_count = len(value.split())
     sha = hashlib.sha256(value.encode("utf-8")).hexdigest()
     freq = dict(Counter(value))
-    created_at = datetime.utcnow().isoformat() + "Z"
+    created_at = datetime.now(timezone.utc).isoformat()
     return {
         "length": length,
         "is_palindrome": is_pal,
