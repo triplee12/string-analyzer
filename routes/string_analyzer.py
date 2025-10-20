@@ -7,7 +7,7 @@ from services.string_service import StringService
 router = APIRouter()
 
 
-@router.post("", response_model=StringResponse, status_code=status.HTTP_201_CREATED)
+@router.post("/strings", response_model=StringResponse, status_code=status.HTTP_201_CREATED)
 def create_string(payload: CreateStringPayload):
     value = payload.value
     if not isinstance(value, str):
@@ -33,7 +33,7 @@ def create_string(payload: CreateStringPayload):
     }
 
 
-@router.get("/{string_value}", response_model=StringResponse)
+@router.get("/strings/{string_value}", response_model=StringResponse)
 def get_string(string_value: str = Path(...)):
     res = StringService.get_by_value(string_value)
     if not res:
@@ -46,7 +46,7 @@ def get_string(string_value: str = Path(...)):
     }
 
 
-@router.get("", response_model=ListResponse)
+@router.get("/", response_model=ListResponse)
 def list_strings(
     is_palindrome: Optional[bool] = Query(None),
     min_length: Optional[int] = Query(None, ge=0),
@@ -68,7 +68,7 @@ def list_strings(
     return {"data": data, "count": len(data), "filters_applied": applied}
 
 
-@router.delete("/{string_value}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/strings/{string_value}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_string(string_value: str = Path(...)):
     ok = StringService.delete(string_value)
     if not ok:

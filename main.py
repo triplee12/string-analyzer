@@ -13,5 +13,5 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="String Analyzer API", lifespan=lifespan)
 
-app.include_router(filter_router, prefix="/strings", tags=["filters"])
-app.include_router(string_router, prefix="/strings", tags=["strings"])
+app.include_router(filter_router, prefix="")
+app.include_router(string_router, prefix="")

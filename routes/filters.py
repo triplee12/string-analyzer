@@ -6,7 +6,7 @@ from services.filter_service import parse_nl_query
 router = APIRouter()
 
 
-@router.get("/filter-by-natural-language")
+@router.get("/strings/filter-by-natural-language")
 def filter_by_nl(query: str = Query(...)):
     try:
         parsed = parse_nl_query(query)
